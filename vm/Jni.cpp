@@ -674,7 +674,7 @@ jobjectRefType dvmGetJNIRefType(Thread* self, jobject jobj) {
     if (obj == reinterpret_cast<Object*>(jobj) && gDvmJni.workAroundAppJniBugs) {
         // If we're handing out direct pointers, check whether 'jobj' is a direct reference
         // to a local reference.
-        return self->jniLocalRefTable.contains(obj) ? JNILocalRefType : JNIInvalidRefType;
+        return getLocalRefTable(env)->contains(obj) ? JNILocalRefType : JNIInvalidRefType;
     } else if (obj == kInvalidIndirectRefObject) {
         return JNIInvalidRefType;
     } else {
